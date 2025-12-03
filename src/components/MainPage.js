@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import GoogleReviews from './GoogleReviews';
 import ServiceCard from './ServiceCard';
 import ContactForm from './ContactForm';
-import MissionStats from './MissionStats';
 
 const MainPage = () => {
   const [activeTab, setActiveTab] = useState('home');
