@@ -63,7 +63,7 @@ const FirewatchDetails = () => {
 
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6">Firewatch Security Services</h1>
+            <h1 className="text-5xl font-bold mb-6">Legacy Page (No Longer Used)</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Professional fire prevention and monitoring services to protect your property 24/7
           </p>
@@ -90,7 +90,7 @@ const FirewatchDetails = () => {
           <div className="space-y-6">
             <h2 className="text-3xl font-semibold mb-4">Comprehensive Protection</h2>
             <p className="text-gray-300 leading-relaxed">
-              At SecureAI Private Security Services, we provide professional Firewatch Security Services to safeguard businesses, construction sites, and properties from fire hazards. Our highly trained personnel ensure your property remains protected through vigilant monitoring and rapid response capabilities.
+              This legacy security content is no longer part of Family Home LLC. Please see our updated care services.
             </p>
             <div className="h-[500px] overflow-hidden rounded-lg shadow-xl"> {/* Increased height */}
               <img 

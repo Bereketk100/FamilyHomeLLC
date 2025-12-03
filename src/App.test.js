@@ -3,5 +3,5 @@ import App from './App';
 
 test('renders brand name SECUREAI', () => {
   render(<App />);
-  expect(screen.getAllByText(/SECUREAI/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Family Home LLC/i)[0]).toBeInTheDocument();
 });

@@ -48,7 +48,7 @@ const ImpactFlowChart = () => {
               <span>Since 2019</span>
             </h2>
             <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-              SecureAI's footprint has steadily expanded across the West Coast—adding cities and partnering with diverse clients in residential, commercial, and event spaces. This visualization highlights cumulative expansion. (Placeholder estimates; replace with live metrics later.)
+              Family Home LLC supports residents across our local community with a focus on high-quality, personalized care. This visualization is a placeholder for care metrics (occupancy, wellness checks, engagement activities). Replace with live data later.
             </p>
             <div className="mt-6 flex flex-wrap gap-6">
               <div className="bg-gray-800/60 rounded-xl px-6 py-4 border border-gray-700/50 shadow flex flex-col items-start">
@@ -69,7 +69,7 @@ const ImpactFlowChart = () => {
               aria-labelledby="flow-title"
               aria-describedby="flow-caption"
             >
-              <title id="flow-title">SecureAI annual expansion: cumulative cities and clients</title>
+              <title id="flow-title">Family Home LLC care metrics: residents and activities</title>
               <defs>
                 <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#3b82f6" />

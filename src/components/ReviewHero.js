@@ -34,9 +34,9 @@ const ReviewHero = () => {
       </div>
 
       <div className="relative z-10 w-full px-6 md:px-10 max-w-5xl mx-auto text-center">
-        <img src="/logo.PNG" alt="SecureAI Logo" className="w-40 md:w-56 mx-auto mb-6" />
+        <img src="/logo.png" alt="Family Home LLC Logo" className="w-40 md:w-56 mx-auto mb-6" />
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-          <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">SECUREAI</span>
+          <span className="bg-gradient-to-r from-sky-500 to-sky-700 bg-clip-text text-transparent">Family Home LLC</span>
         </h1>
         <div className="flex items-center justify-center gap-3 mb-6">
           <Stars />

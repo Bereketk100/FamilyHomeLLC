@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import GoogleReviews from './GoogleReviews';
 import ServiceCard from './ServiceCard';
 import ContactForm from './ContactForm';
-import FloatingReviews from './FloatingReviews';
-import ImpactFlowChart from './ImpactFlowChart';
 import MissionStats from './MissionStats';
 
 const MainPage = () => {
@@ -15,6 +13,15 @@ const MainPage = () => {
   const contactRef = useRef(null);
   const reviewsRef = useRef(null);
   const missionRef = useRef(null);
+  const evergreenImages = ['/white1.png','/white2.png','/white3.png','/white4.png','/white5.png'];
+  const willowImages = ['/blue1.jpeg','/blue2.jpeg','/blue3.jpeg','/blue4.jpeg','/blue5.jpeg','/blue6.jpeg','/blue7.jpeg'];
+  const [evergreenIndex, setEvergreenIndex] = useState(0);
+  const [willowIndex, setWillowIndex] = useState(0);
+
+  const nextEvergreen = () => setEvergreenIndex((i) => (i + 1) % evergreenImages.length);
+  const prevEvergreen = () => setEvergreenIndex((i) => (i - 1 + evergreenImages.length) % evergreenImages.length);
+  const nextWillow = () => setWillowIndex((i) => (i + 1) % willowImages.length);
+  const prevWillow = () => setWillowIndex((i) => (i - 1 + willowImages.length) % willowImages.length);
 
   const scrollToSection = (ref, tabName) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
@@ -22,118 +29,92 @@ const MainPage = () => {
   };
   const services = [
     {
-      title: "Firewatch",
-      description: "Comprehensive fire monitoring and prevention services to keep your property safe.",
-      path: "/services/firewatch",
-      icon: <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 text-white"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-        />
-      </svg>
+      title: '24-Hour Personal Care',
+      description:
+        'Assistance with bathing, grooming, dressing, hygiene, mobility, transfers, and ambulation.',
+      path: '/services/personal-care',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v7h6v-7c0-1.657-1.343-3-3-3z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 21h14" />
+        </svg>
+      ),
     },
     {
-      title: "Business Security",
-      description: "Enterprise-grade solutions designed to protect your business assets seamlessly.",
-      path: "/services/business",
-      icon: <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 text-white"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-        />
-      </svg>
+      title: 'Health & Wellness Support',
+      description:
+        'Medication assistance, monitoring, coordination with providers, appointments and transportation.',
+      path: '/services/health-wellness',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-3-3v6M5 7h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2z" />
+        </svg>
+      ),
     },
     {
-      title: "Mobile Patrol",
-      description: "On-the-go security services to ensure safety and surveillance across various locations.",
-      path: "/services/mobile-patrol",
-      icon: <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 text-white"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
+      title: 'Behavioral & Emotional Support',
+      description:
+        'Patience-based communication, redirection, positive strategies, support for anxiety and trauma.',
+      path: '/services/behavioral-emotional',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8a6 6 0 016 6h-3a3 3 0 00-6 0H6a6 6 0 016-6z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l.01 0" />
+        </svg>
+      ),
     },
     {
-      title: "Apartment/Neighborhood Security",
-      description: "Tailored security solutions for residential communities and apartment complexes.",
-      path: "/services/neighborhood",
-      icon: <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 text-white"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      </svg>
+      title: 'Meal Preparation & Nutrition',
+      description:
+        'Fresh, balanced meals, texture modification, hydration monitoring and meal supervision.',
+      path: '/services/meals-nutrition',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 10h16M6 20h12M8 4h8" />
+        </svg>
+      ),
     },
     {
-      title: "Event Security",
-      description: "Professional security services for events, ensuring safety and smooth operations.",
-      path: "/services/event",
-      icon: <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 text-white"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-        />
-      </svg>
+      title: 'Household Services',
+      description: 'Laundry, housekeeping, clean and organized living environment.',
+      path: '/services/household',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7h18M5 7v14h14V7M7 11h10" />
+        </svg>
+      ),
     },
     {
-      title: "SecureAI Platform",
-      description: "Revolutionary security management software for complete control and visibility of your security operations.",
-      path: "/services/additional",
-      icon: <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-7 w-7 text-white"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-        />
-      </svg>
+      title: 'Community Integration',
+      description: 'Outings, shopping trips, social activities, walks and recreation.',
+      path: '/services/community',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4l6 6-6 6-6-6 6-6z" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Emergency & Safety Support',
+      description:
+        '24/7 supervision, fall prevention, safety protocols for medical/behavioral situations.',
+      path: '/services/emergency-safety',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Individualized Care Plans',
+      description:
+        'Personalized care plans tailored to physical, emotional, and social needs.',
+      path: '/services/care-plans',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+      ),
     }
   ];
 
@@ -156,21 +137,21 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-sky-50 text-slate-800">
       {/* Navigation Banner */}
-      <nav className="fixed top-0 w-full bg-gray-900 shadow-lg z-50">
+      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur shadow z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <img src="/logo.PNG" alt="SecureAI Logo" className="h-10 w-auto" />
-              <span className="ml-2 text-xl font-bold">SECUREAI</span>
+              <img src="/logo.png" alt="Family Home LLC Logo" className="h-14 md:h-16 w-auto" />
+              <span className="ml-2 text-xl font-bold text-sky-700">Family Home LLC</span>
             </div>
             
             {/* Mobile menu button */}
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-300 hover:text-white"
+                className="text-slate-700 hover:text-sky-700"
               >
                 <svg
                   className="h-6 w-6"
@@ -202,7 +183,7 @@ const MainPage = () => {
               <button 
                 onClick={() => scrollToSection(homeRef, 'home')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeTab === 'home' ? 'text-blue-500' : 'text-gray-300 hover:text-white'
+                  activeTab === 'home' ? 'text-sky-700' : 'text-slate-600 hover:text-sky-700'
                 }`}
               >
                 Home
@@ -210,23 +191,15 @@ const MainPage = () => {
               <button 
                 onClick={() => scrollToSection(servicesRef, 'services')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeTab === 'services' ? 'text-blue-500' : 'text-gray-300 hover:text-white'
+                  activeTab === 'services' ? 'text-sky-700' : 'text-slate-600 hover:text-sky-700'
                 }`}
               >
                 Services
               </button>
               <button 
-                onClick={() => scrollToSection(reviewsRef, 'reviews')}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  activeTab === 'reviews' ? 'text-blue-500' : 'text-gray-300 hover:text-white'
-                }`}
-              >
-                Reviews
-              </button>
-              <button 
                 onClick={() => scrollToSection(aboutRef, 'about')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeTab === 'about' ? 'text-blue-500' : 'text-gray-300 hover:text-white'
+                  activeTab === 'about' ? 'text-sky-700' : 'text-slate-600 hover:text-sky-700'
                 }`}
               >
                 About Us
@@ -234,7 +207,7 @@ const MainPage = () => {
               <button 
                 onClick={() => scrollToSection(contactRef, 'contact')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeTab === 'contact' ? 'text-blue-500' : 'text-gray-300 hover:text-white'
+                  activeTab === 'contact' ? 'text-sky-700' : 'text-slate-600 hover:text-sky-700'
                 }`}
               >
                 Contact Us
@@ -242,7 +215,7 @@ const MainPage = () => {
               <button 
                 onClick={() => scrollToSection(missionRef, 'mission')}
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  activeTab === 'mission' ? 'text-blue-500' : 'text-gray-300 hover:text-white'
+                  activeTab === 'mission' ? 'text-sky-700' : 'text-slate-600 hover:text-sky-700'
                 }`}
               >
                 Our Mission
@@ -253,13 +226,13 @@ const MainPage = () => {
           {/* Mobile navigation menu */}
           {isMenuOpen && (
             <div className="md:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-900">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
                 <button
                   onClick={() => {
                     scrollToSection(homeRef, 'home');
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-sky-700 hover:bg-sky-50 rounded-md"
                 >
                   Home
                 </button>
@@ -268,25 +241,17 @@ const MainPage = () => {
                     scrollToSection(servicesRef, 'services');
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-sky-700 hover:bg-sky-50 rounded-md"
                 >
                   Services
                 </button>
-                <button
-                  onClick={() => {
-                    scrollToSection(reviewsRef, 'reviews');
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
-                >
-                  Reviews
-                </button>
+                
                 <button
                   onClick={() => {
                     scrollToSection(aboutRef, 'about');
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-sky-700 hover:bg-sky-50 rounded-md"
                 >
                   About Us
                 </button>
@@ -295,7 +260,7 @@ const MainPage = () => {
                     scrollToSection(contactRef, 'contact');
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-sky-700 hover:bg-sky-50 rounded-md"
                 >
                   Contact Us
                 </button>
@@ -304,7 +269,7 @@ const MainPage = () => {
                     scrollToSection(missionRef, 'mission');
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-slate-700 hover:text-sky-700 hover:bg-sky-50 rounded-md"
                 >
                   Our Mission
                 </button>
@@ -315,132 +280,117 @@ const MainPage = () => {
       </nav>
 
       <div className="pt-16">
-        {/* Hero Section (restored simpler version) */}
-        <section ref={homeRef} className="relative w-full h-screen flex items-center justify-center text-center px-6">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black" />
-          <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Hero Section */}
+        <section ref={homeRef} className="relative w-full min-h-screen flex items-center justify-center text-center px-6 pb-32">
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-sky-50/30 to-sky-50" />
+          <div className="relative z-10 max-w-5xl mx-auto">
             <img
-              src="/logo.PNG"
-              alt="SecureAI Logo"
-              className="mx-auto mb-6 w-44 md:w-72 lg:w-80"
+              src="/logo.png"
+              alt="Family Home LLC Logo"
+              className="mx-auto mb-8 w-[14rem] md:w-[20rem] lg:w-[24rem] drop-shadow-2xl"
             />
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
-              SECUREAI
-            </h1>
-            <p className="text-lg md:text-2xl mb-10 text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Intelligent protection for what matters most, designed with you in mind!
+            <p className="text-2xl md:text-3xl mb-10 text-slate-700 max-w-3xl mx-auto leading-relaxed font-medium italic">
+              Compassionate, person-centered 24-hour residential care in Gresham, Oregon.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
               <button
                 onClick={() => scrollToSection(servicesRef, 'services')}
-                className="bg-blue-600 hover:bg-blue-500 py-4 px-10 rounded-full text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50"
+                className="bg-transparent hover:bg-sky-50 py-3 px-8 md:py-4 md:px-10 rounded-full text-sky-700 font-semibold text-base md:text-lg transition-all duration-300 transform hover:scale-105 border-2 border-sky-500 hover:border-sky-600 shadow-md hover:shadow-lg"
               >
-                Get Started
+                View Services
               </button>
               <button
                 onClick={() => scrollToSection(contactRef, 'contact')}
-                className="bg-transparent hover:bg-blue-600/10 py-4 px-10 rounded-full text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105 border-2 border-blue-600 hover:border-blue-500"
+                className="bg-transparent hover:bg-sky-50 py-3 px-8 md:py-4 md:px-10 rounded-full text-sky-700 font-semibold text-base md:text-lg transition-all duration-300 transform hover:scale-105 border-2 border-sky-500 hover:border-sky-600 shadow-md hover:shadow-lg"
               >
                 Contact Us
               </button>
-              <button
-                onClick={() => scrollToSection(reviewsRef, 'reviews')}
-                className="bg-blue-600 hover:bg-blue-500 py-4 px-10 rounded-full text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 glow-border animate-hero-pulse"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <svg className="w-5 h-5 text-yellow-300 animate-star-glow" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 01.894.553l1.382 2.8 3.09.45a1 1 0 01.554 1.707l-2.236 2.18.528 3.08a1 1 0 01-1.45 1.054L10 12.347l-2.768 1.457a1 1 0 01-1.45-1.054l.528-3.08-2.236-2.18a1 1 0 01.554-1.707l3.09-.45L9.106 2.553A1 1 0 0110 2z" /></svg>
-                  Our Reviews
-                </span>
-              </button>
             </div>
           </div>
         </section>
 
-        {/* Original Critical Gap in Traditional Security Section (restored) */}
-        <section className="py-24 bg-gradient-to-b from-black via-gray-900 to-black reveal" id="critical-gap">
+        {/* Mission & Vision Section */}
+        <section ref={missionRef} className="section-padding bg-gradient-to-b from-sky-50 to-white reveal">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold mb-6 text-red-500">The Critical Gap in Traditional Security</h2>
-                <p className="text-xl text-gray-300 mb-8">Most security companies operate in the dark, leaving you exposed to unnecessary risks.</p>
-              </div>
-              <div className="grid md:grid-cols-2 gap-12 mb-20">
-                <div className="bg-gray-800/50 p-8 rounded-xl backdrop-blur">
-                  <h3 className="text-2xl font-semibold mb-4 text-white">The Real Problem</h3>
-                  <ul className="space-y-4">
-                    <li className="flex items-start">
-                      <svg className="w-6 h-6 text-red-500 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                      <span className="text-gray-300">No system to verify if guards are on-site or performing their duties</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="w-6 h-6 text-red-500 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                      <span className="text-gray-300">Guards disappearing for hours during shifts—unnoticed until incidents occur</span>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="w-6 h-6 text-red-500 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                      <span className="text-gray-300">Billions lost annually in damages, theft, and legal liability</span>
-                    </li>
-                  </ul>
+              <div className="text-center mb-20">
+                <div className="inline-block mb-6">
+                  <div className="flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-sky-100 to-sky-200 shadow-xl mb-4 mx-auto">
+                    <svg className="w-10 h-10 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </div>
                 </div>
-                <div className="bg-blue-900/50 p-8 rounded-xl backdrop-blur">
-                  <h3 className="text-2xl font-semibold mb-4 text-white">The SecureAI Solution</h3>
-                  <ul className="space-y-4">
-                    <li className="flex items-start">
-                      <svg className="w-6 h-6 text-blue-400 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <div>
-                        <span className="text-blue-400 font-semibold">Live Activity Tracking</span>
-                        <p className="text-gray-300">Real-time monitoring of guard locations, activities, and checkpoint compliance</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="w-6 h-6 text-blue-400 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <div>
-                        <span className="text-blue-400 font-semibold">Transparent Guard Logs</span>
-                        <p className="text-gray-300">Time-stamped, verified records of all security activities</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start">
-                      <svg className="w-6 h-6 text-blue-400 mt-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <div>
-                        <span className="text-blue-400 font-semibold">Instant Alert System</span>
-                        <p className="text-gray-300">Immediate notifications for any security protocol breaches</p>
-                      </div>
-                    </li>
-                  </ul>
+                <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+                  <span className="bg-gradient-to-r from-sky-700 via-sky-600 to-sky-500 bg-clip-text text-transparent">Our Mission</span>
+                </h2>
+                <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-light">
+                  To provide safe, compassionate, and person-centered residential care that promotes independence, dignity, and well-being in a warm, home-like environment.
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-8 mb-16">
+                <div className="card-white p-8 text-center">
+                  <div className="icon-badge mx-auto mb-4">
+                    <svg className="w-7 h-7 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Safety First</h3>
+                  <p className="text-slate-600 leading-relaxed">24/7 supervision and protocols ensuring every resident feels secure in their home.</p>
+                </div>
+                
+                <div className="card-white p-8 text-center">
+                  <div className="icon-badge mx-auto mb-4">
+                    <svg className="w-7 h-7 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Person-Centered</h3>
+                  <p className="text-slate-600 leading-relaxed">Individualized care plans tailored to unique needs, preferences, and goals.</p>
+                </div>
+                
+                <div className="card-white p-8 text-center">
+                  <div className="icon-badge mx-auto mb-4">
+                    <svg className="w-7 h-7 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Home Environment</h3>
+                  <p className="text-slate-600 leading-relaxed">Warm, welcoming spaces where residents thrive and families find peace of mind.</p>
                 </div>
               </div>
-              <div className="text-center">
-                <p className="text-2xl font-semibold text-white mb-8">Because security without accountability isn't security at all.</p>
-                <button
-                  onClick={() => scrollToSection(contactRef, 'contact')}
-                  className="bg-blue-600 hover:bg-blue-500 py-4 px-10 rounded-full text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50"
-                >
-                  Secure Your Business Now
-                </button>
+
+              <div className="glass-card rounded-3xl p-10 md:p-12 text-center">
+                <h3 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">Our Vision</h3>
+                <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                  We envision a community where every person—regardless of ability—can live a fulfilling life. We aim to expand our homes, strengthen services, and continuously improve quality of care so residents feel empowered and families feel supported.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Impact Growth Flow Chart */}
-        <ImpactFlowChart />
+        {/* Impact Growth Flow Chart removed for cleaner layout */}
 
         {/* Services Section */}
-        <section ref={servicesRef} className="py-24 bg-black reveal">
+        <section ref={servicesRef} className="section-padding bg-sky-50 reveal">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-semibold text-center mb-16">Our Services</h2>
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4">
+                <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-100 to-sky-200 shadow-lg mb-3 mx-auto">
+                  <svg className="w-8 h-8 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                <span className="bg-gradient-to-r from-sky-700 via-sky-600 to-sky-500 bg-clip-text text-transparent">Our Services</span>
+              </h2>
+              <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
+                Comprehensive care tailored to each resident's unique needs.
+              </p>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {services.map((service, index) => (
                 <ServiceCard key={index} {...service} />
@@ -449,92 +399,192 @@ const MainPage = () => {
           </div>
         </section>
 
-        {/* About Us Section */}
-  <section ref={aboutRef} className="py-24 bg-gray-900 reveal">
+        {/* Our Homes Section */}
+        <section ref={aboutRef} className="section-padding bg-gradient-to-b from-white via-sky-50/30 to-white reveal">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-semibold text-center mb-16">About Us</h2>
-            <div className="max-w-4xl mx-auto">
-              <p className="text-gray-300 text-lg mb-12 leading-relaxed">
-                SecureAI was founded by two security professionals who saw gaps in the industry and set out to redefine private security. With years of hands-on experience, they combined their expertise in AI technology, data analysis, and security operations to create a smarter, more reliable solution.
-              </p>
-
-              <div className="grid md:grid-cols-3 gap-8 mb-12">
-                <div className="bg-gray-800 p-8 rounded-xl flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-white">Bereket Kibret</h3>
-                    <a 
-                      href="https://www.linkedin.com/in/bereketkibret" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300"
-                    >
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                      </svg>
-                    </a>
-                  </div>
-                  <p className="text-gray-300 font-medium">Microsoft Software Engineer</p>
-                  <p className="text-gray-400 mt-4 leading-relaxed flex-grow">
-                    A graduate of the University of Southern California with three years of hands-on security experience. Currently at Microsoft as a software engineer, he combines his security operations background with technical expertise to develop innovative security solutions. His dual experience helps bridge the gap between practical security needs and technological advancement.
-                  </p>
-                  <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-700">
-                    <img src="/microsoft-logo.png" alt="Microsoft" className="h-11" />
-                    <img src="/usc-logo.png" alt="USC" className="h-8" />
-                  </div>
-                </div>
-
-                <div className="bg-gray-800 p-8 rounded-xl flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-white">Samuel Tigistu</h3>
-                    <a 
-                      href="https://www.linkedin.com/in/samuel-tigistu-3060971a3/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300"
-                    >
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                      </svg>
-                    </a>
-                  </div>
-                  <p className="text-gray-300 font-medium">Microsoft Software Engineer</p>
-                  <p className="text-gray-400 mt-4 leading-relaxed flex-grow">
-                    A Yale University graduate specializing in security system architecture. At Microsoft, he leads the development of enterprise security solutions, bringing technical innovation to our platform. His expertise in both software engineering and security infrastructure helps strengthen our AI-powered security systems.
-                  </p>
-                  <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-700">
-                    <img src="/microsoft-logo.png" alt="Microsoft" className="h-12" />
-                    <img src="/yale-logo.png" alt="Yale" className="h-14" />
-                  </div>
-                </div>
-
-                <div className="bg-gray-800 p-8 rounded-xl flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-white">Maher Dedgeba</h3>
-                    <a 
-                      href="https://www.linkedin.com/in/maher-dedgeba-18893a2bb/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300"
-                    >
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                      </svg>
-                    </a>
-                  </div>
-                  <p className="text-gray-300">Target HQ Data Analyst</p>
-                  <p className="text-gray-400 mt-4 leading-relaxed flex-grow">
-                    A San Jose State graduate with extensive experience in security operations. Having served as a Securities Operational Manager for 5 years, he brings valuable insights to our data analytics and operational efficiency. His combination of hands-on security management experience and data analysis skills helps ensure seamless operations and data-driven solutions for our clients.
-                  </p>
-                  <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-700">
-                    <img src="/target-logo.png" alt="Target" className="h-12" />
-                    <img src="/sjsu-logo.png" alt="San Jose State University" className="h-12" />
-                  </div>
+            <div className="text-center mb-20">
+              <div className="inline-block mb-6">
+                <div className="flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-sky-100 to-sky-200 shadow-xl mb-4 mx-auto">
+                  <svg className="w-10 h-10 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
                 </div>
               </div>
-
-              <p className="text-gray-300 text-lg leading-relaxed">
-                By merging technology with in-person security, SecureAI is setting a new standard in safety and transparency—because security should evolve with the world around it. Our platform provides real-time monitoring, enhanced accountability, and faster response times, delivering a comprehensive security solution for the modern era.
+              <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+                <span className="bg-gradient-to-r from-sky-700 via-sky-600 to-sky-500 bg-clip-text text-transparent">Our Homes</span>
+              </h2>
+              <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-light">
+                Two beautiful locations in Gresham, Oregon. Over a decade of compassionate, person-centered care.
               </p>
+            </div>
+            <div className="max-w-5xl mx-auto">
+              <div className="glass-card rounded-3xl p-8 md:p-10 mb-16">
+                <p className="text-slate-700 text-lg md:text-xl leading-relaxed text-center">
+                  Family Home LLC is a compassionate, person-centered residential care provider in Gresham, Oregon. With over a decade of hands-on experience, our Executive Director brings a background in caregiving, adult foster home management, and leadership in residential services—supported by a bachelor's degree and deep dedication to serving individuals with diverse needs.
+                </p>
+              </div>
+
+              <div className="space-y-16 mb-16">
+                {/* Location 1 */}
+                <div className="card-white p-10 md:p-12 rounded-3xl shadow-2xl">
+                  <div className="flex items-start justify-between mb-8">
+                    <div className="flex items-start gap-4">
+                      <div>
+                        <div className="inline-block px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3">Location 1</div>
+                        <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3 tracking-tight">Willow Parkway Home</h3>
+                        <p className="text-slate-600 mt-2 flex items-start gap-2">
+                          <svg className="w-5 h-5 text-sky-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243" />
+                          </svg>
+                          <span className="text-slate-700">2101 SW Willow Pkwy, Gresham, OR 97080</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="icon-badge !w-16 !h-16 flex-shrink-0">
+                      <svg className="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="text-slate-600 text-lg leading-relaxed mb-8">Nestled in a peaceful neighborhood with beautiful sidewalks and convenient access to Safeway, Walmart, and local shops—ideal for quiet living, outdoor walks, and community activities.</p>
+                  
+                  {/* Slideshow with Hover Controls */}
+                  <div className="relative mb-6 group">
+                    <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-sky-200 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 min-h-[500px] max-h-[700px]">
+                      <img 
+                        src={evergreenImages[evergreenIndex]} 
+                        alt={`Willow Parkway Home`} 
+                        className="w-full h-auto max-h-[700px] object-contain transition-opacity duration-700" 
+                      />
+                    </div>
+                    
+                    {/* Navigation Arrows - Visible on Hover */}
+                    <button
+                      onClick={prevEvergreen}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-sky-700 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110"
+                      aria-label="Previous photo"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={nextEvergreen}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-sky-700 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110"
+                      aria-label="Next photo"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                    
+                    <div className="absolute top-4 right-4 bg-sky-600/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                      {evergreenIndex + 1} / {evergreenImages.length}
+                    </div>
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                      {evergreenImages.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setEvergreenIndex(i)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            i === evergreenIndex ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/75'
+                          }`}
+                          aria-label={`Go to photo ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Google Map */}
+                  <div className="rounded-2xl overflow-hidden border-2 border-sky-200 shadow-lg">
+                    <iframe title="Evergreen Map" className="w-full h-80" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=2101+SW+Willow+Pkwy,+Gresham,+OR+97080&output=embed"></iframe>
+                  </div>
+                </div>
+                
+                {/* Location 2 */}
+                <div className="card-white p-10 md:p-12 rounded-3xl shadow-2xl">
+                  <div className="flex items-start justify-between mb-8">
+                    <div className="flex items-start gap-4">
+                      <div>
+                        <div className="inline-block px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3">Location 2</div>
+                        <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3 tracking-tight">21st Drive Home</h3>
+                        <p className="text-slate-600 mt-2 flex items-start gap-2">
+                          <svg className="w-5 h-5 text-sky-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243" />
+                          </svg>
+                          <span className="text-slate-700">3894 SE 21st Drive, Gresham, OR 97080</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="icon-badge !w-16 !h-16 flex-shrink-0">
+                      <svg className="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="text-slate-600 text-lg leading-relaxed mb-8">Close to Fred Meyer, Safeway, WinCo, medical centers, urgent care clinics, pharmacies, and movie theaters—offering comfort, convenience, and access to essential services.</p>
+                  
+                  {/* Slideshow with Hover Controls */}
+                  <div className="relative mb-6 group">
+                    <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-sky-200 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 min-h-[500px] max-h-[700px]">
+                      <img 
+                        src={willowImages[willowIndex]} 
+                        alt={`21st Drive Home`} 
+                        className="w-full h-auto max-h-[700px] object-contain transition-opacity duration-700" 
+                      />
+                    </div>
+                    
+                    {/* Navigation Arrows - Visible on Hover */}
+                    <button
+                      onClick={prevWillow}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-sky-700 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110"
+                      aria-label="Previous photo"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={nextWillow}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-sky-700 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110"
+                      aria-label="Next photo"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                    
+                    <div className="absolute top-4 right-4 bg-sky-600/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                      {willowIndex + 1} / {willowImages.length}
+                    </div>
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                      {willowImages.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setWillowIndex(i)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            i === willowIndex ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/75'
+                          }`}
+                          aria-label={`Go to photo ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Google Map */}
+                  <div className="rounded-2xl overflow-hidden border-2 border-sky-200 shadow-lg">
+                    <iframe title="Willow Map" className="w-full h-80" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=3894+SE+21st+Drive,+Gresham,+OR+97080&output=embed"></iframe>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="glass-card rounded-3xl p-10 md:p-12 text-center">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4">Comprehensive Care for Diverse Needs</h3>
+                <p className="text-slate-600 text-lg leading-relaxed max-w-4xl mx-auto">
+                  We support residents with a wide range of physical, developmental, and mental health needs, including intellectual disabilities, mobility limitations, Alzheimer’s, dementia, PTSD, and other complex conditions. Our priority is the safety, well-being, and happiness of each resident—24 hours a day.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -545,36 +595,50 @@ const MainPage = () => {
         </div>
 
         {/* Contact Us Section */}
-  <section ref={contactRef} id="contact" className="py-24 bg-black reveal">
+        <section ref={contactRef} id="contact" className="section-padding bg-white reveal">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-semibold text-center mb-16">Contact Us</h2>
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4">
+                <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-100 to-sky-200 shadow-lg mb-3 mx-auto">
+                  <svg className="w-8 h-8 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                <span className="bg-gradient-to-r from-sky-700 via-sky-600 to-sky-500 bg-clip-text text-transparent">Contact Us</span>
+              </h2>
+              <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
+                Get in touch with our team. We're here to help and answer any questions.
+              </p>
+            </div>
             <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
               <div className="space-y-6">
-                <div className="bg-gray-800/60 p-6 rounded-xl border border-gray-700">
-                  <h3 className="text-xl font-semibold mb-2">Fast Contact</h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">Share a few details and our team will respond promptly—usually within the same business day.</p>
+                <div className="bg-sky-50 p-6 rounded-xl border border-sky-200">
+                  <h3 className="text-xl font-semibold text-sky-800 mb-2">Fast Contact</h3>
+                  <p className="text-slate-700 text-sm leading-relaxed">Share a few details and our team will respond promptly—usually within the same business day.</p>
                   <div className="mt-4 text-sm space-y-3">
                     <div className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243" /></svg>
-                      <p className="text-gray-400">Address:<br /><span className="text-white">3031 Tisch Way, San Jose, CA 95128, United States</span></p>
+                      <svg className="w-5 h-5 text-sky-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243" /></svg>
+                      <p className="text-slate-600">Address:<br /><span className="text-slate-800">Gresham, OR — Two locations serving the community</span></p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18" /></svg>
-                      <p className="text-gray-400">For general inquiries use the form. For urgent matters, start your message with "URGENT".</p>
+                      <svg className="w-5 h-5 text-sky-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18" /></svg>
+                      <p className="text-slate-600">For general inquiries use the form. For urgent matters, start your message with "URGENT".</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v7h6v-7c0-1.657-1.343-3-3-3z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 21h14" /></svg>
-                      <p className="text-gray-400">All messages are monitored securely—your information is confidential.</p>
+                      <svg className="w-5 h-5 text-sky-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v7h6v-7c0-1.657-1.343-3-3-3z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 21h14" /></svg>
+                      <p className="text-slate-600">All messages are monitored securely—your information is confidential.</p>
                     </div>
                   </div>
-                  <a href="#reviews" className="inline-block mt-6 text-blue-400 hover:text-blue-300 text-sm underline decoration-blue-600/40">See client feedback →</a>
+                  <a href="#reviews" className="inline-block mt-6 text-sky-700 hover:text-sky-600 text-sm underline decoration-sky-600/40">See client feedback →</a>
                 </div>
-                <div className="bg-blue-900/40 p-6 rounded-xl border border-blue-800">
-                  <h3 className="text-lg font-semibold mb-2">Why choose SecureAI?</h3>
-                  <ul className="text-sm text-gray-300 space-y-2">
-                    <li className="flex items-start gap-2"><span className="text-blue-400">•</span> Real-time accountability</li>
-                    <li className="flex items-start gap-2"><span className="text-blue-400">•</span> Faster incident prevention</li>
-                    <li className="flex items-start gap-2"><span className="text-blue-400">•</span> Transparent reporting</li>
+                <div className="bg-sky-50 p-6 rounded-xl border border-sky-200">
+                  <h3 className="text-lg font-semibold text-sky-800 mb-2">Why choose Family Home LLC?</h3>
+                  <ul className="text-sm text-slate-700 space-y-2">
+                    <li className="flex items-start gap-2"><span className="text-sky-600">•</span> Compassionate 24-hour support</li>
+                    <li className="flex items-start gap-2"><span className="text-sky-600">•</span> Person-centered care plans</li>
+                    <li className="flex items-start gap-2"><span className="text-sky-600">•</span> Safe, welcoming home environments</li>
                   </ul>
                 </div>
               </div>
@@ -586,49 +650,77 @@ const MainPage = () => {
         </section>
 
         {/* Mission Section - Enhanced */}
-        <section ref={missionRef} className="py-28 bg-gradient-to-b from-gray-900 via-black to-gray-900 reveal">
+        {/* Our Team Section */}
+        <section className="section-padding bg-gradient-to-br from-slate-50 to-white reveal">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-10">
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">Our Mission</h2>
-              <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">Elevating private security by fusing professional on-site presence with intelligent, adaptive technology—bringing accountability, foresight, and speed together.</p>
-            </div>
-            <MissionStats />
-            <div className="grid md:grid-cols-5 gap-6 mb-16">
-              {[
-                { title: 'Accountability', desc: 'Verified guard actions & location integrity.', icon: 'M5 13l4 4L19 7' },
-                { title: 'Intelligence', desc: 'Data-driven patterns & predictive insights.', icon: 'M12 8v4l3 3' },
-                { title: 'Speed', desc: 'Instant alerts & rapid escalation pipeline.', icon: 'M3 13h18' },
-                { title: 'Transparency', desc: 'Immutable event trail & live reporting.', icon: 'M5 17h14' },
-                { title: 'Reliability', desc: 'Layered tech + trained personnel synergy.', icon: 'M9 7h1m4 0h1' }
-              ].map(p => (
-                <div key={p.title} className="bg-gray-800/60 backdrop-blur rounded-2xl p-6 border border-gray-700/50 flex flex-col gap-3 hover:border-blue-600/50 transition">
-                  <div className="flex items-center gap-3">
-                    <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={p.icon} /></svg>
-                    <h3 className="text-lg font-semibold">{p.title}</h3>
-                  </div>
-                  <p className="text-gray-300 text-sm leading-relaxed">{p.desc}</p>
+            <div className="text-center mb-20">
+              <div className="inline-block mb-6">
+                <div className="flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-sky-100 to-sky-200 shadow-xl mb-4 mx-auto">
+                  <svg className="w-10 h-10 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
                 </div>
-              ))}
+              </div>
+              <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+                <span className="bg-gradient-to-r from-sky-700 via-sky-600 to-sky-500 bg-clip-text text-transparent">Our Team</span>
+              </h2>
+              <p className="text-xl md:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-light">
+                Experienced, compassionate professionals dedicated to exceptional care every day.
+              </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-10 mb-20">
-              <div className="bg-blue-900/30 rounded-2xl border border-blue-700/50 p-8 flex flex-col gap-4">
-                <h3 className="text-xl font-semibold">Why It Matters</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">Reactive security is costly. A proactive, instrumented layer reduces loss, liability, and downtime while increasing trust and retention.</p>
+            
+            <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+              {/* Executive Director */}
+              <div className="card-white p-10 md:p-12 rounded-3xl shadow-xl group hover:shadow-2xl transition-all duration-300">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="icon-badge !w-16 !h-16 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="inline-block px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-xs font-bold uppercase tracking-wider mb-2">Leadership</div>
+                    <h3 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Executive Director</h3>
+                  </div>
+                </div>
+                <p className="text-slate-600 text-lg leading-relaxed">
+                  Over 10 years of diverse caregiving experience, including roles as a caregiver, Adult Foster Home provider, and now Executive Director. With a bachelor's degree and a strong commitment to serving individuals with physical, developmental, and mental health needs, he leads with compassion, integrity, and dedication.
+                </p>
+                <div className="mt-6 pt-6 border-t border-slate-200">
+                  <div className="flex items-center gap-3 text-sm text-slate-500">
+                    <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>10+ Years Experience</span>
+                  </div>
+                </div>
               </div>
-              <div className="bg-purple-900/30 rounded-2xl border border-purple-700/50 p-8 flex flex-col gap-4">
-                <h3 className="text-xl font-semibold">How It Scales</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">Insights compound across properties—pattern detection improves systemic coverage and informs staffing & patrol strategy.</p>
+
+              {/* Care Team */}
+              <div className="card-white p-10 md:p-12 rounded-3xl shadow-xl group hover:shadow-2xl transition-all duration-300">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="icon-badge !w-16 !h-16 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="inline-block px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-xs font-bold uppercase tracking-wider mb-2">Caregivers</div>
+                    <h3 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">Care Team</h3>
+                  </div>
+                </div>
+                <p className="text-slate-600 text-lg leading-relaxed">
+                  Family Home LLC is staffed with trained, compassionate caregivers who prioritize the safety and well-being of every resident. Our team brings expertise, empathy, and dedication to every interaction, creating a warm and supportive environment.
+                </p>
+                <div className="mt-6 pt-6 border-t border-slate-200">
+                  <div className="flex items-center gap-3 text-sm text-slate-500">
+                    <svg className="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>24/7 Dedicated Care</span>
+                  </div>
+                </div>
               </div>
-              <div className="bg-pink-900/30 rounded-2xl border border-pink-700/50 p-8 flex flex-col gap-4">
-                <h3 className="text-xl font-semibold">Human + AI</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">We enhance teams—not replace them—augmenting judgment with telemetry, context, and automated escalation.</p>
-              </div>
-            </div>
-            <div className="text-center">
-              <p className="text-xl text-gray-200 font-medium mb-6">Security shouldn’t be a black box—it should be a source of live truth.</p>
-              <button onClick={() => scrollToSection(contactRef, 'contact')} className="bg-blue-600 hover:bg-blue-500 py-4 px-10 rounded-full text-white font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/50">
-                Start a SecureAI Assessment
-              </button>
             </div>
           </div>
         </section>
@@ -636,12 +728,14 @@ const MainPage = () => {
       {/* Floating Contact Button */}
       <a
         href="#contact"
-        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-full shadow-lg text-sm font-medium transition transform hover:scale-105"
+        className="fixed bottom-8 right-8 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-6 py-4 rounded-full shadow-2xl text-sm font-semibold transition-all duration-300 transform hover:scale-110 hover:shadow-sky-500/50 flex items-center gap-2 z-50"
         aria-label="Quick contact shortcut"
       >
-        Contact Us
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <span>Contact Us</span>
       </a>
-      <FloatingReviews />
     </div>
   );
 };

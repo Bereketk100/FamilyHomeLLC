@@ -7,10 +7,10 @@ const CriticalGapSection = () => {
         <div className="text-center mb-14">
           <h2 id="critical-gap-heading" className="text-3xl font-semibold mb-4 inline-flex items-center gap-3">
             <span className="bg-red-600/20 text-red-300 px-3 py-1 rounded-full text-sm font-medium">The Critical Gap</span>
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">In Traditional Security</span>
+            <span className="bg-gradient-to-r from-sky-500 to-sky-700 bg-clip-text text-transparent">In Traditional Care Settings</span>
           </h2>
           <p className="text-gray-300 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
-            Most legacy security approaches rely heavily on manual patrol logs, delayed reporting, and fragmented communication. This creates blind spots—reduced accountability, slower response, and limited historical insight.
+            Many legacy care models rely on generic routines, delayed communication, and limited personalization. This can lead to missed needs, reduced engagement, and slower responsiveness.
           </p>
         </div>
         <div className="grid lg:grid-cols-2 gap-12">
@@ -25,7 +25,7 @@ const CriticalGapSection = () => {
             </ul>
           </div>
           <div className="bg-blue-900/40 border border-blue-800 rounded-2xl p-8 shadow-lg flex flex-col gap-6">
-            <h3 className="text-xl font-semibold">How SecureAI Closes the Gap</h3>
+            <h3 className="text-xl font-semibold">How Family Home LLC Closes the Gap</h3>
             <ul className="space-y-4 text-blue-100 text-sm leading-relaxed">
               <li className="flex items-start gap-3"><span className="text-blue-400 mt-1">✓</span><span>Live digital patrol logs with geo-verification and timestamp integrity.</span></li>
               <li className="flex items-start gap-3"><span className="text-blue-400 mt-1">✓</span><span>Predictive alerting model to surface anomalies early.</span></li>

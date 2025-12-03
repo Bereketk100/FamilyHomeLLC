@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import FirewatchDetails from './components/services/FirewatchDetails';
-import BusinessSecurityDetails from './components/services/BusinessSecurityDetails';
-import MobilePatrolDetails from './components/services/MobilePatrolDetails';
-import NeighborhoodSecurityDetails from './components/services/NeighborhoodSecurityDetails';
-import EventSecurityDetails from './components/services/EventSecurityDetails';
-import AdditionalServicesDetails from './components/services/AdditionalServicesDetails';
+import PersonalCareDetails from './components/services/PersonalCareDetails';
+import HealthWellnessDetails from './components/services/HealthWellnessDetails';
+import BehavioralEmotionalDetails from './components/services/BehavioralEmotionalDetails';
+import MealsNutritionDetails from './components/services/MealsNutritionDetails';
+import HouseholdDetails from './components/services/HouseholdDetails';
+import CommunityDetails from './components/services/CommunityDetails';
+import EmergencySafetyDetails from './components/services/EmergencySafetyDetails';
+import CarePlansDetails from './components/services/CarePlansDetails';
 import MainPage from './components/MainPage';
 
 const App = () => {
@@ -13,12 +15,14 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/services/firewatch" element={<FirewatchDetails />} />
-        <Route path="/services/business" element={<BusinessSecurityDetails />} />
-        <Route path="/services/mobile-patrol" element={<MobilePatrolDetails />} />
-        <Route path="/services/neighborhood" element={<NeighborhoodSecurityDetails />} />
-        <Route path="/services/event" element={<EventSecurityDetails />} />
-        <Route path="/services/additional" element={<AdditionalServicesDetails />} />
+        <Route path="/services/personal-care" element={<PersonalCareDetails />} />
+        <Route path="/services/health-wellness" element={<HealthWellnessDetails />} />
+        <Route path="/services/behavioral-emotional" element={<BehavioralEmotionalDetails />} />
+        <Route path="/services/meals-nutrition" element={<MealsNutritionDetails />} />
+        <Route path="/services/household" element={<HouseholdDetails />} />
+        <Route path="/services/community" element={<CommunityDetails />} />
+        <Route path="/services/emergency-safety" element={<EmergencySafetyDetails />} />
+        <Route path="/services/care-plans" element={<CarePlansDetails />} />
       </Routes>
     </Router>
   );

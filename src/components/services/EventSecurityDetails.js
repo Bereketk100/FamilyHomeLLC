@@ -90,7 +90,7 @@ const EventSecurityDetails = () => {
           <div className="space-y-6">
             <h2 className="text-3xl font-semibold mb-4">Event Protection</h2>
             <p className="text-gray-300 leading-relaxed">
-              At SecureAI Private Security Services, we provide top-tier Event Security Services to keep your event safe, organized, and running smoothly. Whether it's a corporate gathering, private party, festival, or large public event, our trained security professionals ensure everything goes off without a hitch.
+              This legacy event security page is deprecated. Family Home LLC provides residential care services. Please visit our Services page for current offerings.
             </p>
             <div className="h-[500px] overflow-hidden rounded-lg shadow-xl">
               <img 

@@ -13,53 +13,47 @@ const Stars = ({ count = 5 }) => (
 
 const GoogleReviews = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-900 to-black" id="reviews" aria-labelledby="reviews-heading">
+    <section className="section-padding bg-gradient-to-br from-white to-sky-50" id="reviews" aria-labelledby="reviews-heading">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="mb-12 flex flex-col items-center text-center gap-5">
-          <h2 id="reviews-heading" className="text-3xl font-semibold flex items-center gap-3 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 text-transparent bg-clip-text drop-shadow-[0_0_6px_rgba(234,179,8,0.35)]">
-            <span>What Clients Say</span>
-          </h2>
-          <div className="flex items-center gap-4 bg-gray-800/60 backdrop-blur px-6 py-4 rounded-2xl border border-gray-700/60 shadow-lg">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-100 to-sky-200 mb-6 shadow-lg">
+            <svg className="w-8 h-8 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </div>
+          <h2 id="reviews-heading" className="text-5xl md:text-6xl font-bold headline-sky mb-6">What Families Say</h2>
+          <div className="inline-flex items-center gap-4 glass-card px-8 py-5 rounded-3xl mb-6">
             <Stars />
-            <div>
-              <p className="text-3xl font-bold leading-tight bg-gradient-to-r from-yellow-300 to-yellow-500 text-transparent bg-clip-text">5.0</p>
-              <p className="text-xs text-gray-400 tracking-wide">Rating</p>
+            <div className="border-l border-slate-300 pl-4">
+              <p className="text-4xl font-bold text-slate-800">5.0</p>
+              <p className="text-xs text-slate-600 uppercase tracking-wider">Excellence</p>
             </div>
           </div>
-          <p className="text-gray-300 max-w-2xl text-sm md:text-base leading-relaxed">Trusted across West Coast properties, events, and residential communities. Below are a few highlighted testimonials. For the continuously updated list you can visit Google.</p>
-          <a
-            href="https://www.google.com/search?q=secureai+services#lrd=0x808fcb7126c045b5:0x9ae8c6309121f8d8,1,,,,"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-sm font-medium underline decoration-yellow-500/40 hover:decoration-yellow-300 transition"
-          >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 01.894.553l1.382 2.8 3.09.45a1 1 0 01.554 1.707l-2.236 2.18.528 3.08a1 1 0 01-1.45 1.054L10 12.347l-2.768 1.457a1 1 0 01-1.45-1.054l.528-3.08-2.236-2.18a1 1 0 01.554-1.707l3.09-.45L9.106 2.553A1 1 0 0110 2z"/></svg>
-            See reviews on Google →
-          </a>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">Residents and families share their experiences with our compassionate, person-centered care.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           {reviews.map(r => (
-            <article key={r.id} className="bg-gray-800/70 backdrop-blur p-7 rounded-2xl flex flex-col shadow-lg border border-gray-700/50 hover:border-blue-600/50 transition" aria-label={`Review by ${r.author}`}>
+            <article key={r.id} className="card-white p-8 flex flex-col rounded-2xl" aria-label={`Review by ${r.author}`}>
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="font-semibold text-white text-base">{r.author}</h3>
-                  <p className="text-[11px] text-gray-400">{r.meta}</p>
+                  <h3 className="font-bold text-slate-900 text-lg">{r.author}</h3>
+                  <p className="text-xs text-slate-500">{r.meta}</p>
                 </div>
                 <Stars count={5} />
               </div>
-              <p className="text-[11px] text-gray-500 mb-3">{r.date}</p>
-              <p className="text-gray-200 text-sm leading-relaxed flex-grow">{r.text}</p>
+              <p className="text-xs text-slate-400 mb-3">{r.date}</p>
+              <p className="text-slate-700 text-sm leading-relaxed flex-grow">{r.text}</p>
             </article>
           ))}
         </div>
 
-        <div className="mt-12 bg-blue-900/40 border border-blue-800 rounded-xl p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div className="glass-card rounded-3xl p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-xl">
-            <h3 className="text-xl font-semibold mb-2">Ready to experience this level of reliability?</h3>
-            <p className="text-gray-300 text-sm">Reach out now for a custom security assessment. We'll respond promptly.</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">Experience Exceptional Care</h3>
+            <p className="text-slate-600 text-base leading-relaxed">Reach out now for a personalized care consultation. We'll respond promptly to answer all your questions.</p>
           </div>
-          <a href="#contact" className="bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-lg font-medium text-white text-center shadow-lg transition">Contact Us</a>
+          <a href="#contact" className="btn-sky shrink-0">Contact Us Today</a>
         </div>
       </div>
     </section>

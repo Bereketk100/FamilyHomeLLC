@@ -1,26 +1,26 @@
-// Shared reviews data for SecureAI
+// Shared reviews data for Family Home LLC
 // NOTE: This is a small snapshot subset for UI rendering, not the full set of client reviews.
 // Update with new highlights; avoid implying only these exist.
 export const reviews = [
   {
     id: 1,
-    author: 'Jennifer Rocha',
-    meta: '2 reviews · 1 photo',
+    author: 'Jennifer R.',
+    meta: 'Family Member',
     date: '2 weeks ago',
-    text: `I’ve used SecureAI for multiple stadium events and always felt confident in the level of safety they provided. The guards were professional, well-trained, and made sure everything stayed under control. Management was great to work with too.`
+    text: `Family Home LLC provides compassionate, reliable care. Our loved one feels safe, respected, and truly at home. Staff communicate clearly and consistently, and the home is always warm and welcoming.`
   },
   {
     id: 2,
-    author: 'Yanet Teshager',
-    meta: '3 reviews',
+    author: 'Yanet T.',
+    meta: 'Family Member',
     date: '3 weeks ago',
-    text: `I’ve been working with this security company for about a year now, and I couldn’t be happier with their services. Before them, we dealt with all kinds of problems from other security companies—things like guards not showing up. SecureAI changed everything.`
+    text: `The staff are patient, attentive, and respectful. They always keep us informed and make sure our family member is comfortable and engaged with meaningful activities.`
   },
   {
     id: 3,
-    author: 'Yuele Tesfalem',
-    meta: 'New reviewer',
+    author: 'Yuele T.',
+    meta: 'Provider Partner',
     date: '2 days ago',
-    text: `We’ve had about four different security companies over the past few years, and none of them really worked out. This past year with SecureAI has been the first time we’ve actually been happy with our security. They’re reliable, professional, and handle things the right way. They keep us updated every night and have stopped several problems before they got worse. Highly recommend for apartment properties in higher crime areas.`
+    text: `Family Home LLC collaborates well with providers and offers consistent, person-centered support. They prioritize safety and dignity while keeping communication clear and proactive.`
   }
 ];

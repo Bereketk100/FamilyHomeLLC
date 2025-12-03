@@ -63,7 +63,7 @@ const AdditionalServicesDetails = () => {
 
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6">SecureAI Platform</h1>
+          <h1 className="text-5xl font-bold mb-6">Care Coordination Tools</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Revolutionary security management software for complete control and visibility
           </p>
@@ -90,20 +90,20 @@ const AdditionalServicesDetails = () => {
           <div className="space-y-6">
             <h2 className="text-3xl font-semibold mb-4">Complete Control & Visibility</h2>
             <p className="text-gray-300 leading-relaxed">
-              SecureAI revolutionizes security management by combining cutting-edge technology with real-world insights. Our platform provides total control over your security operations, ensuring every patrol is completed on time and your entire workforce is managed efficiently from one seamless interface.
+              Family Home LLC uses modern, resident-centered tools to coordinate care, track wellness checks, and communicate clearly with families and providers. Replace this placeholder with your preferred care platform details.
             </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-lg shadow-xl bg-gray-900 p-2 h-[600px]">
                 <img 
                   src="/secure10.png" 
-                  alt="SecureAI Platform Interface" 
+                  alt="Care Platform Interface" 
                   className="w-full h-full object-contain"
                 />
               </div>
               <div className="rounded-lg shadow-xl bg-gray-900 p-2 h-[600px]">
                 <img 
                   src="/secure9.png" 
-                  alt="SecureAI Platform Features" 
+                  alt="Care Platform Features" 
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -129,7 +129,7 @@ const AdditionalServicesDetails = () => {
         <div className="text-center bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-12">
           <h2 className="text-3xl font-bold mb-4">Transform Your Security Operations</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Ready to take your security management to the next level? Contact us to learn more about the SecureAI platform.
+            Want to learn how we coordinate care and communication? Contact us for details.
           </p>
           <button 
             onClick={() => {

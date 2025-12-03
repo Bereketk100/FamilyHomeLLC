@@ -90,7 +90,7 @@ const BusinessSecurityDetails = () => {
           <div className="space-y-6">
             <h2 className="text-3xl font-semibold mb-4">Comprehensive Business Protection</h2>
             <p className="text-gray-300 leading-relaxed">
-              At SecureAI, we specialize in providing cutting-edge security solutions tailored to protect businesses of all sizes. Our AI-driven security approach, combined with highly trained security professionals, ensures round-the-clock protection for your property, assets, and personnel.
+              Family Home LLC focuses on residential care. This legacy security page is no longer used and will be removed. For current services, please see our care offerings.
             </p>
             <div className="h-[500px] overflow-hidden rounded-lg shadow-xl">
               <img 
@@ -120,7 +120,7 @@ const BusinessSecurityDetails = () => {
         <div className="text-center bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-12">
           <h2 className="text-3xl font-bold mb-4">Secure Your Business Today</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Partner with SecureAI and experience a new standard in business security—where innovation meets reliability.
+            Explore compassionate, person-centered care with Family Home LLC.
           </p>
           <button 
             onClick={() => {
