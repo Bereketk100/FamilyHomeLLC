@@ -12,7 +12,7 @@ const MainPage = () => {
   const contactRef = useRef(null);
   const reviewsRef = useRef(null);
   const missionRef = useRef(null);
-  const evergreenImages = ['/white1.png','/white2.png','/white3.png','/white4.png','/white5.png'];
+  const evergreenImages = ['/white1.png','/white2.png'];
   const willowImages = ['/blue1.jpeg','/blue2.jpeg','/blue3.jpeg','/blue4.jpeg','/blue5.jpeg','/blue6.jpeg','/blue7.jpeg','/blue8.png','/blue9.png'];
   const [evergreenIndex, setEvergreenIndex] = useState(0);
   const [willowIndex, setWillowIndex] = useState(0);
