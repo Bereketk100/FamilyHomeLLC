@@ -13,14 +13,36 @@ const MainPage = () => {
   const reviewsRef = useRef(null);
   const missionRef = useRef(null);
   const evergreenImages = ['/white1.png','/white2.png','/white3.png','/white4.png','/white5.png'];
-  const willowImages = ['/blue1.jpeg','/blue2.jpeg','/blue3.jpeg','/blue4.jpeg','/blue5.jpeg','/blue6.jpeg','/blue7.jpeg'];
+  const willowImages = ['/blue1.jpeg','/blue2.jpeg','/blue3.jpeg','/blue4.jpeg','/blue5.jpeg','/blue6.jpeg','/blue7.jpeg','/blue8.png','/blue9.png'];
   const [evergreenIndex, setEvergreenIndex] = useState(0);
   const [willowIndex, setWillowIndex] = useState(0);
+  const [isEvergreenTransitioning, setIsEvergreenTransitioning] = useState(false);
+  const [isWillowTransitioning, setIsWillowTransitioning] = useState(false);
 
-  const nextEvergreen = () => setEvergreenIndex((i) => (i + 1) % evergreenImages.length);
-  const prevEvergreen = () => setEvergreenIndex((i) => (i - 1 + evergreenImages.length) % evergreenImages.length);
-  const nextWillow = () => setWillowIndex((i) => (i + 1) % willowImages.length);
-  const prevWillow = () => setWillowIndex((i) => (i - 1 + willowImages.length) % willowImages.length);
+  const nextEvergreen = () => {
+    if (isEvergreenTransitioning) return;
+    setIsEvergreenTransitioning(true);
+    setEvergreenIndex((i) => (i + 1) % evergreenImages.length);
+    setTimeout(() => setIsEvergreenTransitioning(false), 300);
+  };
+  const prevEvergreen = () => {
+    if (isEvergreenTransitioning) return;
+    setIsEvergreenTransitioning(true);
+    setEvergreenIndex((i) => (i - 1 + evergreenImages.length) % evergreenImages.length);
+    setTimeout(() => setIsEvergreenTransitioning(false), 300);
+  };
+  const nextWillow = () => {
+    if (isWillowTransitioning) return;
+    setIsWillowTransitioning(true);
+    setWillowIndex((i) => (i + 1) % willowImages.length);
+    setTimeout(() => setIsWillowTransitioning(false), 300);
+  };
+  const prevWillow = () => {
+    if (isWillowTransitioning) return;
+    setIsWillowTransitioning(true);
+    setWillowIndex((i) => (i - 1 + willowImages.length) % willowImages.length);
+    setTimeout(() => setIsWillowTransitioning(false), 300);
+  };
 
   const scrollToSection = (ref, tabName) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
@@ -53,12 +75,34 @@ const MainPage = () => {
     {
       title: 'Behavioral & Emotional Support',
       description:
-        'Patience-based communication, redirection, positive strategies, support for anxiety and trauma.',
+        'Patience-based communication, redirection, positive strategies, support for anxiety and trauma. Collaborate with behavior specialists and support our residents with well-trained, compassionate staff.',
       path: '/services/behavioral-emotional',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8a6 6 0 016 6h-3a3 3 0 00-6 0H6a6 6 0 016-6z" />
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l.01 0" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Skill Support',
+      description:
+        'Assist the resident in developing daily living skills such as cooking, cleaning, personal hygiene, and time management. Assist residents in participating in programs and activities that support their personal goals, interests, and skill development.',
+      path: '/services/skill-support',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+    },
+    {
+      title: 'Employment & DSA Programs',
+      description:
+        'Support residents in accessing employment and DSA programs, coordinate with case managers, job coaches, and DSA providers to support residents in finding and maintaining employment and working toward their individual goals.',
+      path: '/services/employment-dsa',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
     },
@@ -445,7 +489,7 @@ const MainPage = () => {
                       </svg>
                     </div>
                   </div>
-                  <p className="text-slate-600 text-lg leading-relaxed mb-8">Nestled in a peaceful neighborhood with beautiful sidewalks and convenient access to Safeway, Walmart, and local shops—ideal for quiet living, outdoor walks, and community activities.</p>
+                  <p className="text-slate-600 text-lg leading-relaxed mb-8">Nestled in a peaceful neighborhood with beautiful sidewalks. Close to different shopping centers, medical centers, urgent care clinics, pharmacies, movie theaters, parks, and offering comfort, convenience, and access to essential services.</p>
                   
                   {/* Slideshow with Hover Controls */}
                   <div className="relative mb-6 group">
@@ -453,7 +497,7 @@ const MainPage = () => {
                       <img 
                         src={evergreenImages[evergreenIndex]} 
                         alt={`Willow Parkway Home`} 
-                        className="w-full h-auto max-h-[700px] object-contain transition-opacity duration-700" 
+                        className="w-full h-auto max-h-[700px] object-contain transition-all duration-300" 
                       />
                     </div>
                     
@@ -521,7 +565,7 @@ const MainPage = () => {
                       </svg>
                     </div>
                   </div>
-                  <p className="text-slate-600 text-lg leading-relaxed mb-8">Close to Fred Meyer, Safeway, WinCo, medical centers, urgent care clinics, pharmacies, and movie theaters—offering comfort, convenience, and access to essential services.</p>
+                  <p className="text-slate-600 text-lg leading-relaxed mb-8">Modern and welcoming home environment. Close to different shopping centers, medical centers, urgent care clinics, pharmacies, movie theaters, parks, and offering comfort, convenience, and access to essential services.</p>
                   
                   {/* Slideshow with Hover Controls */}
                   <div className="relative mb-6 group">
@@ -529,7 +573,7 @@ const MainPage = () => {
                       <img 
                         src={willowImages[willowIndex]} 
                         alt={`21st Drive Home`} 
-                        className="w-full h-auto max-h-[700px] object-contain transition-opacity duration-700" 
+                        className="w-full h-auto max-h-[700px] object-contain transition-all duration-300" 
                       />
                     </div>
                     
