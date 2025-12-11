@@ -13,7 +13,7 @@ const CarePlansDetails = () => {
     'Regular reviews and updates',
     'Outcome tracking and communication',
   ];
-  const image = '/familyhome-care-8.jpg';
+  const image = '/photo9.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };

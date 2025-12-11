@@ -13,7 +13,7 @@ const MealsNutritionDetails = () => {
     'Hydration reminders and monitoring',
     'Safe food handling and kitchen standards',
   ];
-  const image = '/familyhome-care-4.jpg';
+  const image = '/photo6.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };

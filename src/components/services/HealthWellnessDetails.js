@@ -13,7 +13,7 @@ const HealthWellnessDetails = () => {
     'Appointment scheduling and transportation',
     'Health records and communication support',
   ];
-  const image = '/familyhome-care-2.jpg';
+  const image = '/photo3.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };

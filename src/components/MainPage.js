@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import GoogleReviews from './GoogleReviews';
 import ServiceCard from './ServiceCard';
 import ContactForm from './ContactForm';
 
 const MainPage = () => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const homeRef = useRef(null);
@@ -12,6 +14,12 @@ const MainPage = () => {
   const contactRef = useRef(null);
   const reviewsRef = useRef(null);
   const missionRef = useRef(null);
+  useEffect(() => {
+    if (location?.state?.scrollTo === 'services' && servicesRef.current) {
+      servicesRef.current.scrollIntoView({ behavior: 'auto' });
+      setActiveTab('services');
+    }
+  }, [location, servicesRef]);
   const evergreenImages = ['/white1.png','/white2.png'];
   const willowImages = ['/blue1.jpeg','/blue2.jpeg','/blue3.jpeg','/blue4.jpeg','/blue5.jpeg','/blue6.jpeg','/blue7.jpeg','/blue8.png','/blue9.png'];
   const [evergreenIndex, setEvergreenIndex] = useState(0);
@@ -52,7 +60,7 @@ const MainPage = () => {
     {
       title: '24-Hour Personal Care',
       description:
-        'Assistance with bathing, grooming, dressing, hygiene, mobility, transfers, and ambulation.',
+        'Assistance with bathing, grooming, dressing, hygiene, mobility, transfers, and ambulation—delivered with dignity and consistency.',
       path: '/services/personal-care',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +72,7 @@ const MainPage = () => {
     {
       title: 'Health & Wellness Support',
       description:
-        'Medication assistance, monitoring, coordination with providers, appointments and transportation.',
+        'Medication assistance, monitoring, provider coordination, appointments, and transportation to keep residents on track and supported.',
       path: '/services/health-wellness',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,7 +83,7 @@ const MainPage = () => {
     {
       title: 'Behavioral & Emotional Support',
       description:
-        'Patience-based communication, redirection, positive strategies, support for anxiety and trauma. Collaborate with behavior specialists and support our residents with well-trained, compassionate staff.',
+        'Patience-based communication, redirection, positive strategies, and support for anxiety or trauma—collaborating with specialists and a well-trained, compassionate team.',
       path: '/services/behavioral-emotional',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,20 +93,9 @@ const MainPage = () => {
       ),
     },
     {
-      title: 'Skill Support',
-      description:
-        'Assist the resident in developing daily living skills such as cooking, cleaning, personal hygiene, and time management. Assist residents in participating in programs and activities that support their personal goals, interests, and skill development.',
-      path: '/services/skill-support',
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-    },
-    {
       title: 'Employment & DSA Programs',
       description:
-        'Support residents in accessing employment and DSA programs, coordinate with case managers, job coaches, and DSA providers to support residents in finding and maintaining employment and working toward their individual goals.',
+        'Access to employment and DSA programs with coordination between residents, case managers, job coaches, and providers—focused on growth and stability.',
       path: '/services/employment-dsa',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -109,7 +106,7 @@ const MainPage = () => {
     {
       title: 'Meal Preparation & Nutrition',
       description:
-        'Fresh, balanced meals, texture modification, hydration monitoring and meal supervision.',
+        'Fresh, balanced meals with texture modifications, hydration monitoring, and supervision to match preferences and needs.',
       path: '/services/meals-nutrition',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -119,7 +116,7 @@ const MainPage = () => {
     },
     {
       title: 'Household Services',
-      description: 'Laundry, housekeeping, clean and organized living environment.',
+      description: 'Laundry, housekeeping, and a clean, organized living environment that feels calm and welcoming.',
       path: '/services/household',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -129,7 +126,7 @@ const MainPage = () => {
     },
     {
       title: 'Community Integration',
-      description: 'Outings, shopping trips, social activities, walks and recreation.',
+      description: 'Outings, shopping trips, social activities, walks, and recreation that keep residents engaged and connected.',
       path: '/services/community',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -140,7 +137,7 @@ const MainPage = () => {
     {
       title: 'Emergency & Safety Support',
       description:
-        '24/7 supervision, fall prevention, safety protocols for medical/behavioral situations.',
+        '24/7 supervision, fall prevention, and safety protocols for medical or behavioral situations—ready and responsive.',
       path: '/services/emergency-safety',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -151,7 +148,7 @@ const MainPage = () => {
     {
       title: 'Individualized Care Plans',
       description:
-        'Personalized care plans tailored to physical, emotional, and social needs.',
+        'Personalized care plans tailored to physical, emotional, and social needs, reviewed regularly with families and providers.',
       path: '/services/care-plans',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">

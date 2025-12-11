@@ -13,7 +13,7 @@ const HouseholdDetails = () => {
     'Clean, calm environment standards',
     'Supplies management and restocking',
   ];
-  const image = '/familyhome-care-5.jpg';
+  const image = '/photo4.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };

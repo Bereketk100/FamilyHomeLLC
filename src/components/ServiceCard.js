@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useRef, useEffect } from 'react';
 
-const ServiceCard = ({ title, description, icon, path }) => {
+const ServiceCard = ({ title, description, path, icon }) => {
   const navigate = useNavigate();
   const ref = useRef(null);
 
@@ -41,12 +41,16 @@ const ServiceCard = ({ title, description, icon, path }) => {
       </h3>
       <p className="text-slate-600 text-sm leading-relaxed text-center flex-grow">{description}</p>
       <div className="mt-4 pt-4 border-t border-slate-100">
-        <div className="text-sky-600 font-semibold text-sm flex items-center justify-center gap-1 group-hover:gap-2 transition-all">
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); navigate(path); }}
+          className="text-sky-600 font-semibold text-sm flex items-center justify-center gap-2 group-hover:gap-3 transition-all"
+        >
           <span>Learn More</span>
           <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
           </svg>
-        </div>
+        </button>
       </div>
       <style>{`
         .service-card.sr-visible { opacity:1; transform:translateY(0); }

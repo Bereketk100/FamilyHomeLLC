@@ -13,7 +13,7 @@ const EmergencySafetyDetails = () => {
     'Clear protocols and documentation',
     'Proactive risk identification',
   ];
-  const image = '/familyhome-care-7.jpg';
+  const image = '/photo8.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };

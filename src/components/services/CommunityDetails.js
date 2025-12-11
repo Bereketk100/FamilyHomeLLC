@@ -13,7 +13,7 @@ const CommunityDetails = () => {
     'Social engagement and events',
     'Transportation and support coordination',
   ];
-  const image = '/familyhome-care-6.jpg';
+  const image = '/photo10.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };

@@ -13,7 +13,7 @@ const PersonalCareDetails = () => {
     'Night supervision and on-call support',
     'Dignity-first, resident-centered approach',
   ];
-  const image = '/familyhome-care-1.jpg';
+  const image = '/photo2.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };

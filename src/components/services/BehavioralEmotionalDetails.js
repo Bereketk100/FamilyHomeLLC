@@ -13,7 +13,7 @@ const BehavioralEmotionalDetails = () => {
     'Personalized coping approaches',
     'Family collaboration and progress updates',
   ];
-  const image = '/familyhome-care-3.jpg';
+  const image = '/photo.png';
 
   return <ServiceDetailsLayout title={title} description={description} features={features} image={image} />;
 };
