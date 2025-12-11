@@ -27,7 +27,7 @@ const ContactForm = () => {
     setError('');
     setIsSubmitting(true);
 
-    fetch('https://formcarry.com/s/6ke1FR2Sql5', {
+    fetch('https://formcarry.com/s/gi_M63IHP07', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
