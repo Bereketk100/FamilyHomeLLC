@@ -20,7 +20,7 @@ const MainPage = () => {
       setActiveTab('services');
     }
   }, [location, servicesRef]);
-  const evergreenImages = ['/white1.png','whitephoto1.png','whitephoto2.png','whitephoto3.jpeg','whitephoto4.png','whitephoto5.jpeg','/white2.png'];
+  const evergreenImages = ['/white1.png','whitephoto1.png', '/1.png', 'whitephoto2.png','whitephoto3.jpeg','whitephoto4.png','whitephoto5.jpeg','/white2.png', '/2.png', '/3.png'];
   const willowImages = ['/bluefront.png','/bluefront1.jpeg','/bluefront2.png','/blue1.jpeg','/blue2.jpeg','/blue3.jpeg','/blue4.jpeg','/blue5.jpeg','/blue6.jpeg','/blue7.jpeg','/blue8.png','/blue9.png'];
   const [evergreenIndex, setEvergreenIndex] = useState(0);
   const [willowIndex, setWillowIndex] = useState(0);
